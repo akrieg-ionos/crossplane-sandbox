@@ -1,0 +1,22 @@
+# Use this file to create a Lan CR.
+# Required values for creating a Lan CR are:
+# - DatacenterConfig (via ID or reference),
+# - Public.
+apiVersion: compute.ionoscloud.crossplane.io/v1alpha1
+kind: Lan
+metadata:
+  name: mycrossplane-lan
+managementPolicies:
+  - "*"
+spec:
+  forProvider:
+    name: mycrossplane-lan
+    #pcc:
+    #  PrivateCrossConnectIdRef:
+    #    name: examplePcc
+    public: true
+    datacenterConfig:
+      datacenterIdRef:
+        name: mycrossplane-datacenter
+  providerConfigRef:
+    name: ionoscloud-provider-config

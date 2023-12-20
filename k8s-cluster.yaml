@@ -1,0 +1,22 @@
+apiVersion: k8s.ionoscloud.crossplane.io/v1alpha1
+kind: Cluster
+metadata:
+  name: mycrossplane-k8s-cluster
+managementPolicies:
+  - "*"
+spec:
+  forProvider:
+    name: mycrossplane-k8s-cluster
+    k8sVersion: 1.28.3
+  #    apiSubnetAllowList:
+  #      -
+  #    s3Buckets:
+  #      - name:
+  #    maintenanceWindow:
+  #      time: "23:40:58Z"
+  #      dayOfTheWeek: Friday
+  writeConnectionSecretToRef:
+    namespace: default
+    name: kubeconfig
+  providerConfigRef:
+    name: ionoscloud-provider-config

@@ -1,0 +1,14 @@
+apiVersion: compute.ionoscloud.crossplane.io/v1alpha1
+kind: Datacenter
+metadata:
+  name: mycrossplane-datacenter
+managementPolicies:
+  - "*"
+spec:
+  forProvider:
+    name: mycrossplane # metadata.name is *not* taken as default
+    location: de/fra
+    description: "crossplane test"
+#    secAuthProtection: true
+  providerConfigRef:
+    name: ionoscloud-provider-config

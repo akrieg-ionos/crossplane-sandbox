@@ -1,0 +1,30 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-ionos
+spec:
+  package: ghcr.io/ionos-cloud/crossplane-provider-ionoscloud:latest
+  controllerConfigRef:
+    name: debug-config
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  name: debug-config
+spec:
+  args:
+    - --debug
+    # In order to enable name uniqueness support for IONOS Cloud Resources, uncomment the next line:
+    # - --unique-names
+---
+apiVersion: ionoscloud.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: ionoscloud-provider-config
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: ionos-provider-secret
+      key: credentials

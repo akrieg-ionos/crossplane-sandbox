@@ -17,7 +17,7 @@ curl -sL https://raw.githubusercontent.com/crossplane/crossplane/master/install.
 ## Create a cluster
 
 ```bash
-kind create cluster --name crossplane --config cluster.yaml
+kind create cluster --name crossplane --config kind-cluster.yaml
 ```
 
 ## Install Crossplane
@@ -54,7 +54,8 @@ kubectl apply -f k8s-namespace-object.yaml
 ### install CRDs
 
 ```bash
-git clone https://github.com/ionos-cloud/crossplane-provider-ionoscloud.git
+wget https://github.com/ionos-cloud/crossplane-provider-ionoscloud/archive/main.zip
+unzip main.zip && mv crossplane-provider-ionoscloud-master crossplane-provider-ionoscloud && rm main.zip
 kubectl apply -f crossplane-provider-ionoscloud/package/crds/ -R
 ```
 
@@ -76,5 +77,30 @@ kubectl create secret generic --namespace crossplane-system ionos-provider-secre
 ### install provider
 
 ```bash
-kubectl apply -f  crossplane-provider-ionoscloud/examples/provider/install-provider.yaml
+kubectl apply -f ionos-provider.yaml
 ```
+
+### create a datacenter
+
+```bash
+kubectl apply -f datacenter.yaml
+```
+
+### create a lan
+
+```bash
+kubectl apply -f lan.yaml
+```
+
+### create a k8s cluster
+
+```bash
+kubectl apply -f k8s-cluster.yaml
+```
+
+### create a lan
+
+```bash
+kubectl apply -f lan.yaml
+```
+
